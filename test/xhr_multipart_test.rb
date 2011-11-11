@@ -1,3 +1,5 @@
+require File.expand_path('../test_helper', __FILE__)
+
 class XhrMultipartTest < Test::Unit::TestCase
   def setup
     gem 'eventmachine', '>= 0.12.10'

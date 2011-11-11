@@ -1,10 +1,8 @@
 # -*- encoding: binary -*-
-
 require 'rubygems'
-gem 'thin'
 require 'thin'
+require File.expand_path('../test_helper', __FILE__)
 
-Thin.send(:include, Palmade::SocketIoRack::Mixins::Thin)
 class Thin::Connection
   def send_data(data)
     (@data ||= [ ]).push(data)

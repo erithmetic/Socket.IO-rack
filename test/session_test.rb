@@ -1,3 +1,6 @@
+require File.expand_path('../test_helper', __FILE__)
+require 'redis'
+
 class SessionTest < Test::Unit::TestCase
   def test_success
     assert(true, "WTF?!?")

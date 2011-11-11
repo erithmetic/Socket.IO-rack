@@ -22,7 +22,7 @@ class MixinsThinTest < Test::Unit::TestCase
   end
 
   def test_mixin
-    assert(thin_conn_klass.include?(Palmade::SocketIoRack::Mixins::ThinConnection), "Thin connection mixin not included")
+    assert(thin_conn_klass.include?(Palmade::SocketIoRack::Mixins::Thin::Connection), "Thin connection mixin not included")
 
     conn = thin_conn_klass.new(1)
     assert(conn.respond_to?(:websocket_upgrade?), "Thin::Connection missing websocket_upgrade? method")
@@ -31,7 +31,7 @@ class MixinsThinTest < Test::Unit::TestCase
 
   def test_websocket_mixin
     conn = Thin::Connection.new(1)
-    conn.extend(Palmade::SocketIoRack::Mixins::ThinWebSocketConnection)
+    conn.extend(Palmade::SocketIoRack::Mixins::Thin::WebSocketConnection)
 
     assert(conn.respond_to?(:post_init_with_websocket), "Thin::Connection missing extended :post_init method")
     assert(conn.respond_to?(:receive_data_with_websocket), "Thin::Connection missing extended :receive_data method")

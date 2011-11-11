@@ -19,3 +19,6 @@ module Palmade
     autoload :EchoResource, File.join(SOCKET_IO_RACK_LIB_DIR, 'socket_io_rack/echo_resource')
   end
 end
+
+Rainbows.send(:include, Palmade::SocketIoRack::Mixins::Rainbows) if Object.const_defined?('Rainbows')
+Thin.send(:include, Palmade::SocketIoRack::Mixins::Thin) if Object.const_defined?('Thin')

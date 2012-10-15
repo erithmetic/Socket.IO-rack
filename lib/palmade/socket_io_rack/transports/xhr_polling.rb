@@ -3,7 +3,7 @@
 module Palmade::SocketIoRack
   module Transports
     class XhrPolling < Base
-      Cxhrpolling = "xhr-polling".freeze
+      XHR_POLLING = "xhr-polling".freeze
       CREQUEST_METHOD = "REQUEST_METHOD".freeze
       CPOST = "POST".freeze
       CGET = "GET".freeze
@@ -22,7 +22,7 @@ module Palmade::SocketIoRack
         super(resource, DEFAULT_OPTIONS.merge(options))
       end
 
-      def transport_name; Cxhrpolling; end
+      def transport_name; XHR_POLLING; end
 
       def handle_request(env, transport_options, persistence)
         session = setup_session(transport_options, persistence)

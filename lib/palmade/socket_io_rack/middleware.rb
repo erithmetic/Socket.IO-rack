@@ -16,24 +16,24 @@ module Palmade::SocketIoRack
     CPOST = "POST".freeze
     CGET = "GET".freeze
 
-    Cwebsocket = "websocket".freeze
+    WEBSOCKET = "websocket".freeze
     CWebSocket = "WebSocket".freeze
     CUpgrade = "Upgrade".freeze
     CConnection = "Connection".freeze
     CHTTP_UPGRADE = "HTTP_UPGRADE".freeze
     CHTTP_CONNECTION = "HTTP_CONNECTION".freeze
-    Cflashsocket = "flashsocket".freeze
-    Cxhrpolling = "xhr-polling".freeze
+    FLASH_SOCKET = "flashsocket".freeze
+    XHR_POLLING = "xhr-polling".freeze
     Cws_handler = "ws_handler".freeze
-    Cxhrmultipart = "xhr-multipart".freeze
+    XHR_MULTIPART = "xhr-multipart".freeze
 
     CContentType = "Content-Type".freeze
     CCTtext_plain = "text/plain".freeze
 
-    SUPPORTED_TRANSPORTS = [ Cwebsocket,
-                             Cflashsocket,
-                             Cxhrpolling,
-                             Cxhrmultipart
+    SUPPORTED_TRANSPORTS = [ WEBSOCKET,
+                             FLASH_SOCKET,
+                             XHR_POLLING,
+                             XHR_MULTIPART
                            ]
 
     def initialize(app, options = { })
@@ -86,13 +86,13 @@ module Palmade::SocketIoRack
 
               if SUPPORTED_TRANSPORTS.include?(transport)
                 case transport
-                when Cwebsocket
+                when WEBSOCKET
                   performed, response = perform_websocket(env, rpath, transport, transport_options)
-                when Cflashsocket
+                when FLASH_SOCKET
                   performed, response = perform_flashsocket(env, rpath, transport, transport_options)
-                when Cxhrpolling
+                when XHR_POLLING
                   performed, response = perform_xhr_polling(env, rpath, transport, transport_options)
-                when Cxhrmultipart
+                when XHR_MULTIPART
                   performed, response = perform_xhr_multipart(env, rpath, transport, transport_options)
                 end
               else
@@ -114,7 +114,7 @@ module Palmade::SocketIoRack
       performed = false
       response = nil
 
-      if !env[CHTTP_UPGRADE].nil? && env[CHTTP_UPGRADE].downcase == Cwebsocket &&
+      if !env[CHTTP_UPGRADE].nil? && env[CHTTP_UPGRADE].downcase == WEBSOCKET &&
           env[CHTTP_CONNECTION] == CUpgrade
 
         resource = create_resource(rpath,
@@ -122,7 +122,7 @@ module Palmade::SocketIoRack
                                    transport_options)
 
         performed, response = resource.
-          initialize_transport!(Cwebsocket).handle_request(env, transport_options, persistence)
+          initialize_transport!(WEBSOCKET).handle_request(env, transport_options, persistence)
       end
 
       [ performed, response ]
@@ -140,7 +140,7 @@ module Palmade::SocketIoRack
                                    transport_options)
 
         performed, response = resource.
-          initialize_transport!(Cflashsocket).handle_request(env, transport_options, persistence)
+          initialize_transport!(FLASH_SOCKET).handle_request(env, transport_options, persistence)
       end
 
       [ performed, response ]
@@ -156,7 +156,7 @@ module Palmade::SocketIoRack
                                    transport_options)
 
         performed, response = resource.
-          initialize_transport!(Cxhrpolling).handle_request(env, transport_options, persistence)
+          initialize_transport!(XHR_POLLING).handle_request(env, transport_options, persistence)
       end
 
       [ performed, response ]
@@ -172,7 +172,7 @@ module Palmade::SocketIoRack
                                    transport_options)
 
         performed, response = resource.
-          initialize_transport!(Cxhrmultipart).handle_request(env, transport_options, persistence)
+          initialize_transport!(XHR_MULTIPART).handle_request(env, transport_options, persistence)
       end
 
       [ performed, response ]

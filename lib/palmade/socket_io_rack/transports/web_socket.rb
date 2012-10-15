@@ -3,7 +3,7 @@
 module Palmade::SocketIoRack
   module Transports
     class WebSocket < Base
-      Cwebsocket = "websocket".freeze
+      WEBSOCKET = "websocket".freeze
       CWebSocket = "WebSocket".freeze
       CUpgrade = "Upgrade".freeze
       CConnection = "Connection".freeze
@@ -14,7 +14,7 @@ module Palmade::SocketIoRack
         :outbound_max_cycle => 0
       }
 
-      def transport_name; Cwebsocket; end
+      def transport_name; WEBSOCKET; end
 
       def initialize(resource, options = { })
         super(resource, DEFAULT_OPTIONS.merge(options))

@@ -144,18 +144,6 @@ module Palmade::SocketIoRack
         session
       end
 
-      def respond_200(msg, headers = { })
-        if msg.is_a?(String) || msg.is_a?(Array)
-          [ 200, DEFAULT_HEADERS.merge(headers), [ msg ].flatten ]
-        else
-          [ 200, DEFAULT_HEADERS.merge(headers), msg ]
-        end
-      end
-
-      def respond_404(msg, headers = { })
-        [ 404, DEFAULT_HEADERS.merge(headers), [ msg ].flatten ]
-      end
-
       # note, this is support on Thin. see Thin::Connection::AsyncResponse
       def respond_async
         [ -1, { }, [ ] ]

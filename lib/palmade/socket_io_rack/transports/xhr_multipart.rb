@@ -3,7 +3,7 @@
 module Palmade::SocketIoRack
   module Transports
     class XhrMultipart < XhrPolling
-      Cxhrmultipart = "xhr-multipart".freeze
+      XHR_MULTIPART = "xhr-multipart".freeze
       CREQUEST_METHOD = "REQUEST_METHOD".freeze
       CPOST = "POST".freeze
       CGET = "GET".freeze
@@ -48,7 +48,7 @@ module Palmade::SocketIoRack
         end
       end
 
-      def transport_name; Cxhrmultipart; end
+      def transport_name; XHR_MULTIPART; end
 
       def initialize(resource, options = { })
         super(resource, DEFAULT_OPTIONS.merge(options))

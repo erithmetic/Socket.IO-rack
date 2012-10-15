@@ -1,9 +1,9 @@
 module Palmade::SocketIoRack
   module Transports
     class FlashSocket < WebSocket
-      Cflashsocket = "flashsocket".freeze
+      FLASH_SOCKET = "flashsocket".freeze
 
-      def transport_name; Cflashsocket; end
+      def transport_name; FLASH_SOCKET; end
     end
   end
 end

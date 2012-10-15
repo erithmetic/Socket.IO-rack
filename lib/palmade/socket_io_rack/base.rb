@@ -7,10 +7,10 @@ module Palmade::SocketIoRack
     attr_reader :session
     attr_reader :transport
 
-    Cxhrpolling = "xhr-polling".freeze
-    Cwebsocket = "websocket".freeze
-    Cflashsocket = "flashsocket".freeze
-    Cxhrmultipart = "xhr-multipart".freeze
+    XHR_POLLING = "xhr-polling".freeze
+    WEBSOCKET = "websocket".freeze
+    FLASH_SOCKET = "flashsocket".freeze
+    XHR_MULTIPART = "xhr-multipart".freeze
 
     Cmframe = "~m~".freeze
     Chframe = "~h~".freeze
@@ -24,13 +24,13 @@ module Palmade::SocketIoRack
 
     def initialize_transport!(tn, to = { })
       case tn
-      when Cwebsocket
+      when WEBSOCKET
         @transport = Transports::WebSocket.new(self, to)
-      when Cflashsocket
+      when FLASH_SOCKET
         @transport = Transports::FlashSocket.new(self, to)
-      when Cxhrpolling
+      when XHR_POLLING
         @transport = Transports::XhrPolling.new(self, to)
-      when Cxhrmultipart
+      when XHR_MULTIPART
         @transport = Transports::XhrMultipart.new(self, to)
       else
         raise "Unsupported transport #{tn}"
